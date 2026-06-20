@@ -1,53 +1,71 @@
 # 🎯 Mouse Trainer
 
-A simple mouse training application built with Python and Pygame.
+Mouse Trainer is an open-source desktop application built with Python, Pygame, and Tkinter to help improve mouse accuracy, clicking speed, and reaction time.
 
-The goal of this project is to improve mouse accuracy, clicking speed, and reaction time while learning the fundamentals of game development with Pygame.
+The project was created as a lightweight alternative to ad-heavy online mouse training websites and is being developed as a learning project focused on game development, event handling, and GUI programming.
 
-## Current Status
+---
 
-### Version 0.1
+## Features
 
-Implemented:
+### Current Features
 
-* Pygame setup
-* Application window
-* Custom window title
+* Pygame game window
+* Target rendering
+* Mouse click detection
+* Circle collision detection
+* Random target repositioning
+* Live CPS display
 
-This version serves as the foundation for future gameplay features.
+---
 
 ## Planned Features
 
-### CPS Counter
+### CPS Training Mode
 
-Measure Clicks Per Second (CPS) in real time.
+A dedicated mode for measuring Clicks Per Second (CPS).
 
-### Accuracy Training
+Features:
 
-Random targets will appear on the screen. Players must click them as accurately as possible.
+* User-selectable test duration
+* Fixed target area
+* Real-time CPS tracking
+* Final CPS results
 
-### Statistics
+---
 
-Track:
+### Accuracy Training Mode
 
-* Hits
-* Misses
-* Accuracy Percentage
-* CPS
-* Total Score
+A target appears at random positions on the screen.
 
-### Difficulty Progression
+Features:
 
-Future versions may include:
+* Random target spawning
+* Hit tracking
+* Miss tracking
+* Accuracy percentage
+* Session statistics
 
-* Smaller targets
-* Faster target spawning
-* Multiple difficulty levels
+---
+
+### Tkinter Launcher
+
+A graphical launcher will allow users to:
+
+* Select game mode
+* Enter training duration
+* Configure session settings
+* Launch training sessions easily
+
+---
 
 ## Technologies Used
 
 * Python
 * Pygame
+* Tkinter
+
+---
 
 ## Project Structure
 
@@ -55,8 +73,11 @@ Future versions may include:
 mouse-trainer/
 │
 ├── main.py
-└── README.md
+├── README.md
+└── .gitignore
 ```
+
+---
 
 ## Installation
 
@@ -66,48 +87,74 @@ Install Pygame:
 pip install pygame
 ```
 
-## Running the Project
+---
+
+## Running
 
 ```bash
 python main.py
 ```
 
-## Learning Objectives
-
-This project is being built to practice:
-
-* Event handling
-* Game loops
-* Mouse input
-* Collision detection
-* Real-time statistics
-* Pygame fundamentals
+---
 
 ## Roadmap
 
 ### Version 0.2
 
-* Draw target
-* Detect mouse clicks
+* [x] Pygame window
+* [x] Target rendering
+* [x] Click detection
+* [x] Random target movement
+* [x] CPS tracking
 
 ### Version 0.3
 
-* Random target positions
-* Score counter
+* [ ] Tkinter launcher
+* [ ] User time selection
+* [ ] CPS training mode
 
 ### Version 0.4
 
-* CPS calculation
-* Accuracy tracking
+* [ ] Accuracy training mode
+* [ ] Hit counter
+* [ ] Miss counter
+* [ ] Accuracy statistics
+
+### Version 0.5
+
+* [ ] Threading support
+* [ ] Improved UI
+* [ ] Session summaries
 
 ### Version 1.0
 
-* Complete mouse training application
-* Polished interface
-* Performance statistics
+* [ ] Complete mouse training suite
+* [ ] Multiple training modes
+* [ ] Detailed statistics
+* [ ] Polished user experience
+
+---
+
+## Learning Objectives
+
+This project is being built to learn:
+
+* Pygame fundamentals
+* Tkinter GUI development
+* Event handling
+* Collision detection
+* Game loops
+* Threading
+* Software architecture
+* Real-time statistics
+
+---
 
 ## Author
 
-Zeeshan Afzal
+**Zeeshan Afzal**
 
-Self-learning Python programmer exploring automation, computer science, artificial intelligence, and software development.
+Self-taught Python developer exploring automation, computer science, artificial intelligence, and software development.
+
+GitHub:
+https://github.com/pythndevs-wq
