@@ -44,7 +44,7 @@ while running:
 
         # check if the mouse is within the target circle
         if (target_x - x) ** 2 + (target_y - y) ** 2 <= target_radius ** 2:
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: # [0 means left button]
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: # [1 means left button]
                 clicks += 1
                 displaying = False
                 CPS = clicks / (pygame.time.get_ticks() / 1000) # it will calculate by dividing the total clicks by the total time in seconds in result giving us the click per second
