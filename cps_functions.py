@@ -1,5 +1,6 @@
 import pygame
 import time
+import random
 
 for_sec = 1
 pygame.init()
@@ -7,88 +8,86 @@ pygame.init()
 
 def simple_cps():
      #screen setup
+ # screen setup
     HEIGHT, WIDTH = 600, 800
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Mouse Trainer")
 
-
-    #clicks
+    # clicks
     CPS = 0
     clicks = 0
 
-    # box
-    circle_width, circle_height = 100, 100
-    circle_x, circle_y = WIDTH // 2 - circle_width // 2, HEIGHT // 2 - circle_height // 2
+
+    # target
+    target_radius = 30
+    target_x, target_y = WIDTH // 2 , HEIGHT // 2
 
 
-      # state
-    waiting = True         # True before the test starts ("Press Enter to Start")
-    running_test = False   # True while the 5-second timer is counting down
-    start_ticks = 0
-    elapsed = 0
 
-    #show text
+
+    # Show CPS nad press enter to start
+    displaying = True
     font = pygame.font.SysFont(None, 36)
-    start_text = font.render("Press Enter to Start", True, (0, 0, 0))
-    restart_text = font.render("Press Enter to Restart", True, (0, 0, 0))
 
 
+
+
+    # others behind the game loop
     running = True
     clock = pygame.time.Clock()
 
+    # main loop
     while running:
-        x , y = pygame.mouse.get_pos()
+
+
+        (x, y) = pygame.mouse.get_pos()
+
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-                # (re)start the test
-                clicks = 0
-                CPS = 0
-                elapsed = 0
-                start_ticks = pygame.time.get_ticks()
-                waiting = False
-                running_test = True
-            
-            if running_test:
-                if (circle_x <= x <= circle_x + circle_width) and (circle_y <= y <= circle_y + circle_height):
-                    if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                        clicks += 1
-
-        if running_test:
-            elapsed = (pygame.time.get_ticks() - start_ticks) / 1000
-            if elapsed >= for_sec:
-                elapsed = for_sec
-                running_test = False
-                CPS = clicks / for_sec
-            else:
-                CPS = clicks / elapsed if elapsed > 0 else 0  # avoid division by zero
-                
+            # check if the mouse is within the target circle
+            if (target_x - x) ** 2 + (target_y - y) ** 2 <= target_radius ** 2:
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: # [1 means left button]
+                    clicks += 1
+                    displaying = False
+                    CPS = clicks / (pygame.time.get_ticks() / 1000) # it will calculate by dividing the total clicks by the total time in seconds in result giving us the click per second
+                    # move the target to a new random position
+                    target_x = random.randint(target_radius, WIDTH - target_radius)
+                    target_y = random.randint(target_radius, HEIGHT - target_radius)
 
     
-        
+
+        # fill the background
         screen.fill((255, 255, 255))
-        pygame.draw.circle(screen, (255, 0, 0), (circle_x + circle_width // 2, circle_y + circle_height // 2), 50)
+        # draw the target circle
+        pygame.draw.circle(screen, (255, 0, 0), (target_x, target_y), target_radius)
 
-        # show texts
-        if waiting:
-            screen.blit(start_text, (WIDTH // 2 - start_text.get_width() // 2, HEIGHT // 2 - start_text.get_height() // 2))
-        elif not running_test:
-            screen.blit(restart_text, (WIDTH // 2 - restart_text.get_width() // 2, HEIGHT // 2 - restart_text.get_height() // 2))
+        # draw the CPS text nad press enter to start text
+        cps_text = font.render(f"CPS: {CPS:.2f}", True, (0, 0, 0))
+        screen.blit(cps_text, (10, 10))
 
-        screen.blit(font.render(f"CPS: {CPS:.2f} ==> {clicks}", True, (0, 0, 0)), (10, 10))
-        screen.blit(font.render(f"Time: {elapsed:.2f} / {for_sec} sec", True, (0, 0, 0)), (10, 40))
+        if displaying:
+            p_enter_text = font.render(f"Click to start...", True, (0, 0, 0))
+            screen.blit(p_enter_text, (target_x - p_enter_text.get_width() // 2, target_y - target_radius - 50))
 
-        clock.tick(60)
+        clock.tick(60)  # limit to 60 frames per second
+        # refrest screen after every loop
         pygame.display.flip()
 
 
 
 
+def in_rect(x, y, x_min, x_max, y_min, y_max):
+    if (x_min <= x <= x_max) and (y_min <= y <= y <= y_max):
+        return True
 
 
 
+def menu_window():
+    pass
+    
 
 
 
