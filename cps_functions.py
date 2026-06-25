@@ -79,9 +79,13 @@ def simple_cps():
 
 
 
-def in_rect(x, y, x_min, x_max, y_min, y_max):
-    if (x_min <= x <= x_max) and (y_min <= y <= y <= y_max):
+# Fixed typo (y <= y <= y) and calculated the true max boundaries
+def in_rect(m_x, m_y, x, r_width, y, r_height):
+    x_max = x + r_width
+    y_max = y + r_height
+    if (x <= m_x <= x_max) and (y <= m_y <= y_max):
         return True
+    return False # Explicitly return False if outside
 
 
 
